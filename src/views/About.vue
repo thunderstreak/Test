@@ -14,6 +14,12 @@ export default {
   created () {
   },
   mounted () {
+    this.$http({
+      url: '/api/v1',
+      method: 'get'
+    }).then(res => {
+      console.log(res)
+    })
   },
   methods: {}
 }

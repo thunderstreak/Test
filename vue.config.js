@@ -4,7 +4,7 @@ const resolve = dir => path.join(__dirname, dir)
 
 const ENV = process.env.NODE_ENV
 const production = 'production'
-// const deployment = 'deployment'
+// const development = 'development'
 const publicPath = ENV === production ? './' : '/'
 
 module.exports = {

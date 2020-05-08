@@ -4,7 +4,7 @@ const resolve = dir => path.join(__dirname, dir)
 
 const ENV = process.env.NODE_ENV
 const production = 'production'
-// const development = 'development'
+const development = 'development'
 const publicPath = ENV === production ? './' : '/'
 
 module.exports = {
@@ -28,10 +28,20 @@ module.exports = {
   lintOnSave: 'error', // 是否在保存的时候检查
   productionSourceMap: true, // 生产环境是否生成 sourceMap 文件
   css: {
-    extract: true, // 是否使用css分离插件 ExtractTextPlugin
+    extract: ENV !== development, // 是否使用css分离插件 ExtractTextPlugin 开发环境下默认不开启，与css热重载不兼容 Default：生产环境下是 true ，开发环境下是 false
     sourceMap: false, // 开启 CSS source maps
-    loaderOptions: {}, // css预设器配置项
-    requireModuleExtension: false // 启用 CSS modules for all css / pre-processor files.
+    loaderOptions: {
+      // postcss: {
+      //   plugins: [
+      //     require('postcss-pxtorem')({ // 把px单位换算成rem单位
+      //       rootValue: 37.5, // vant官方使用的是37.5
+      //       selectorBlackList: ['vant', 'mu'], // 忽略转换正则匹配项
+      //       propList: ['*']
+      //     })
+      //   ]
+      // }
+    }, // css预设器配置项
+    requireModuleExtension: true // 启用 CSS modules for all css / pre-processor files.
   },
   chainWebpack: config => {
     config.resolve.alias // 路径别名

@@ -1,25 +1,28 @@
+import { SET, GET, MUTATIONS } from '../types'
+
 const state = {
-  main: 0
+  tabNarActive: 0
 }
 
 const mutations = {
-  DECREMENT_MAIN_COUNTER (state) {
-    state.main--
-  },
-  INCREMENT_MAIN_COUNTER (state) {
-    state.main++
+  [MUTATIONS.MUTATIONS_TAB_BAR_ACTIVE] (state, payload) {
+    state.tabNarActive = payload
   }
 }
 
 const actions = {
-  someAsyncTask ({ commit }) {
-    // do something async
-    commit('INCREMENT_MAIN_COUNTER')
+  [SET.SET_TAB_BAR_ACTIVE] ({ commit }, payload) {
+    commit(MUTATIONS.MUTATIONS_TAB_BAR_ACTIVE, payload)
   }
+}
+
+const getters = {
+  [GET.GET_TAB_BAR_ACTIVE]: state => state.tabNarActive
 }
 
 export default {
   state,
   mutations,
-  actions
+  actions,
+  getters
 }

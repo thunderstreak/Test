@@ -2,12 +2,15 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+import FastClick from 'fastclick'
+
 import 'amfe-flexible'
 import '@styles/index.less'
 import '@utils'
 import '@config'
 
-import 'vant/lib/index.css'
+FastClick.attach(document.body) // 使用 fastclick
+
 Vue.config.productionTip = false
 
 export default new Vue({

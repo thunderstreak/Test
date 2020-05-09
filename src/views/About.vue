@@ -11,18 +11,18 @@
 </template>
 
 <script>
-import Vue from 'vue'
 import { Tab, Tabs } from 'vant'
 
-Vue.use(Tab)
-Vue.use(Tabs)
 export default {
   name: 'about',
   data: () => ({
     name: 'about_name',
     active: 2
   }),
-  components: {},
+  components: {
+    VanTab: Tab,
+    'van-tabs': Tabs
+  },
   created () {
   },
   mounted () {

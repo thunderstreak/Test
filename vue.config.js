@@ -8,8 +8,7 @@ const development = 'development'
 const publicPath = ENV === production ? './' : '/'
 
 module.exports = {
-  // baseUrl: '/', // 部署应用时的根路径(默认'/'),也可用相对路径(存在使用限制)
-  publicPath, // 在vue-cli.3.3版本后 baseUrl被废除了，因此这边要写成 publicPath。
+  publicPath, // 部署应用时的根路径(默认'/'),也可用相对路径(存在使用限制) 在vue-cli.3.3版本后 baseUrl被废除了，因此这边要写成 publicPath。
   outputDir: 'dist', // 运行时生成的生产环境构建文件的目录(默认''dist''，构建之前会被清除)
   assetsDir: 'static', // 放置生成的静态资源(s、css、img、fonts)的(相对于 outputDir 的)目录(默认'')
   indexPath: 'index.html', // 指定生成的 index.html 的输出路径(相对于 outputDir)也可以是一个绝对路径。
@@ -50,12 +49,13 @@ module.exports = {
       .set('@utils', resolve('src/utils'))
       .set('@config', resolve('src/config'))
       .set('@components', resolve('src/components'))
+      .set('@store', resolve('src/store'))
   },
   runtimeCompiler: true, // Runtime + Compiler vs. Runtime only
   // 反向代理
   devServer: {
     // 环境配置
-    host: '192.168.98.66',
+    host: '0.0.0.0',
     port: 8080,
     https: false,
     hotOnly: false,

@@ -1,7 +1,5 @@
 <template>
   <div class="home">
-    <!--<img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>-->
     <van-nav-bar
       title="标题"
       left-text="返回"
@@ -16,8 +14,6 @@
 </template>
 
 <script>
-// @ is an alias to /src
-// import HelloWorld from '@/components/HelloWorld.vue'
 import { NavBar, Toast } from 'vant'
 export default {
   name: 'Home',

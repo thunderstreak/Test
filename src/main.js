@@ -5,9 +5,9 @@ import store from './store'
 import FastClick from 'fastclick'
 
 import 'amfe-flexible'
-import '@styles/index.less'
-import '@utils'
-import '@config'
+import '@src/styles/index.less'
+import '@src/utils'
+import '@src/config'
 
 FastClick.attach(document.body) // 使用 fastclick
 

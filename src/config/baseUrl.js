@@ -2,7 +2,7 @@ export const prod = 'prod'
 export const test = 'test'
 
 let baseUrl
-switch (process.env.VUE_APP_TITLE) {
+switch (process.env.VUE_APP_ENV) {
   case test:
     baseUrl = 'http://www.test.com'
     break

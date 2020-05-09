@@ -1,3 +1,4 @@
+// const mergeConfig = require('./config')
 const path = require('path')
 
 const resolve = dir => path.join(__dirname, dir)
@@ -5,7 +6,8 @@ const resolve = dir => path.join(__dirname, dir)
 const ENV = process.env.NODE_ENV
 const production = 'production'
 const development = 'development'
-const publicPath = ENV === production ? './' : '/'
+const isProduction = process.env.NODE_ENV === production
+const publicPath = isProduction ? './' : '/'
 
 module.exports = {
   publicPath, // 部署应用时的根路径(默认'/'),也可用相对路径(存在使用限制) 在vue-cli.3.3版本后 baseUrl被废除了，因此这边要写成 publicPath。
@@ -43,13 +45,9 @@ module.exports = {
     requireModuleExtension: true // 启用 CSS modules for all css / pre-processor files.
   },
   chainWebpack: config => {
-    config.resolve.alias // 路径别名
-      .set('@src', resolve('src'))
-      .set('@styles', resolve('src/styles'))
-      .set('@utils', resolve('src/utils'))
-      .set('@config', resolve('src/config'))
-      .set('@components', resolve('src/components'))
-      .set('@store', resolve('src/store'))
+    // 路径别名
+    config.resolve.alias.set('@src', resolve('src'))
+    // mergeConfig(config)
   },
   runtimeCompiler: true, // Runtime + Compiler vs. Runtime only
   // 反向代理
@@ -69,6 +67,30 @@ module.exports = {
         }
       }
     }
+  },
+
+  configureWebpack: config => {
+    const plugins = []
+
+    if (isProduction) {
+      // 取消webpack警告的性能提示
+      config.performance = {
+        hints: 'warning',
+        // 入口起点的最大体积
+        maxEntrypointSize: 1000 * 500,
+        // 生成文件的最大体积
+        maxAssetSize: 1000 * 1000,
+        // 只给出 js 文件的性能提示
+        assetFilter: function (assetFilename) {
+          return assetFilename.endsWith('.js')
+        }
+      }
+
+      // 打包时npm包转CDN
+      // config.externals = externals;
+    }
+
+    return { plugins }
   },
   pluginOptions: {
     // 第三方插件配置

@@ -5,7 +5,6 @@ import baseUrl from './baseUrl'
 axios.interceptors.request.use(
   config => {
     config.headers.proxy = baseUrl
-    console.log(config)
     return config
   },
   error => {

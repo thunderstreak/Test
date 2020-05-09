@@ -1,5 +1,3 @@
-const { mergeConfig } = require('./config/build')
-console.log(mergeConfig)
 const path = require('path')
 
 const resolve = dir => path.join(__dirname, dir)

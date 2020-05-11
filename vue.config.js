@@ -46,20 +46,22 @@ module.exports = {
   chainWebpack: config => {
     // 路径别名
     config.resolve.alias.set('@src', resolve('src'))
-    // 压缩图片
-    config.module
-      .rule('images')
-      .test(/\.(png|jpe?g|gif|svg)(\?.*)?$/)
-      .use('image-webpack-loader')
-      .loader('image-webpack-loader')
-      .options({ bypassOnDebug: true })
+    if (isProduction) {
+      // 压缩图片
+      config.module
+        .rule('images')
+        .test(/\.(png|jpe?g|gif|svg)(\?.*)?$/)
+        .use('image-webpack-loader')
+        .loader('image-webpack-loader')
+        .options({ bypassOnDebug: true })
 
-    // webpack 会默认给commonChunk打进chunk-vendors，所以需要对webpack的配置进行delete
-    config.optimization.delete('splitChunks')
+      // webpack 会默认给commonChunk打进chunk-vendors，所以需要对webpack的配置进行delete
+      config.optimization.delete('splitChunks')
 
-    config
-      .plugin('webpack-bundle-analyzer')
-      .use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin)
+      config
+        .plugin('webpack-bundle-analyzer')
+        .use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin)
+    }
   },
   runtimeCompiler: true, // Runtime + Compiler vs. Runtime only
   // 反向代理
